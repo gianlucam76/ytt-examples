@@ -1,0 +1,10 @@
+#@data/values
+---
+name: "sample-app"
+image:
+  tag: "latest"
+
+appMode: staging
+certificatePath: /etc/ssl/staging
+databaseUser: staging-user
+databasePassword: staging-password

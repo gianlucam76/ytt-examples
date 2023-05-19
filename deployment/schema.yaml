@@ -1,0 +1,13 @@
+#@data/values-schema
+---
+name: ""
+replicas: 1
+
+image:
+  name: nginx
+  tag: "1.14.2"
+
+appMode: ""
+certificatePath: ""
+databaseUser: ""
+databasePassword: ""

@@ -1,0 +1,49 @@
+#@ load("@ytt:data", "data")
+---
+
+#@ def labels():
+environment: #@ data.values.appMode
+#@ end
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: #@ data.values.name
+  labels: #@ labels()
+spec:
+  selector:
+    app: #@ data.values.name
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #@ data.values.name
+  labels: #@ labels()
+spec:
+  replicas: #@ data.values.replicas
+  selector:
+    matchLabels: #@ labels()
+  template:
+    metadata:
+      labels: #@ labels()
+    spec:
+      containers:
+        - name: sample-app
+          image: #@ data.values.image.name + ":" + data.values.image.tag
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8080
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: application-settings
+stringData:
+  app_mode: #@ data.values.appMode
+  certificates: #@ data.values.certificatePath
+  db_user: #@ data.values.databaseUser
+  db_password: #@ data.values.databasePassword
