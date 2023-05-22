@@ -1,6 +1,7 @@
 #@data/values-schema
 ---
 name: ""
+namespace: ""
 replicas: 1
 
 image:
