@@ -1,6 +1,7 @@
 #@data/values
 ---
 name: "sample-app"
+namespace: "staging"
 image:
   tag: "latest"
 
